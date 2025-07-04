@@ -1,7 +1,7 @@
 # 移动抓取机器人仿真平台 - 系统架构设计
 
 **版本:** 1.0
-**创建日期:** 2025-07-04
+**创建日期:** 2025-07-03
 **负责人:** SA (System Architect)
 **关联需求:** [docs/CAPABILITY_MATRIX.md](CAPABILITY_MATRIX.md)
 
@@ -18,24 +18,24 @@
 ```mermaid
 graph TD
     subgraph "任务层 (Task Layer)"
-        FMS_Interface[外部任务接口<br>(fms_interface)];
-        Task_Coordinator[任务协调器<br>(task_coordinator/BehaviorTree)];
+        FMS_Interface["外部任务接口<br>(fms_interface)"];
+        Task_Coordinator["任务协调器<br>(task_coordinator/BehaviorTree)"];
     end
 
     subgraph "功能层 (Functional Layer)"
-        Navigation[导航系统<br>(Nav2)];
-        Manipulation[操作规划系统<br>(MoveIt2)];
-        Perception[视觉感知系统<br>(perception_sim)];
+        Navigation["导航系统<br>(Nav2)"];
+        Manipulation["操作规划系统<br>(MoveIt2)"];
+        Perception["视觉感知系统<br>(perception_sim)"];
     end
 
     subgraph "执行层 (Execution Layer)"
-        ROS2_Control[硬件抽象层<br>(ros2_control)];
-        Robot_Description[机器人模型<br>(mobile_manipulator_description)];
+        ROS2_Control["硬件抽象层<br>(ros2_control)"];
+        Robot_Description["机器人模型<br>(mobile_manipulator_description)"];
     end
 
     subgraph "仿真/物理世界"
-        Gazebo[Gazebo仿真环境];
-        RealRobot[真实机器人硬件];
+        Gazebo["Gazebo仿真环境"];
+        RealRobot["真实机器人硬件"];
     end
 
     FMS_Interface -- "RequestTask.action" --> Task_Coordinator;
