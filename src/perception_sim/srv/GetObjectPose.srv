@@ -1,0 +1,8 @@
+# Request
+# 可以传入要查找的对象ID或名称
+string object_id
+---
+# Response
+# 返回是否成功找到，以及物体的位姿
+bool success
+geometry_msgs/PoseStamped object_pose
