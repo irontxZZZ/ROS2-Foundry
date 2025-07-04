@@ -1,0 +1,11 @@
+# FMS (Fleet Management System) a task request
+# 任务请求内容，例如任务ID和类型
+string task_id
+string task_type # e.g., "KITTING", "FETCH"
+---
+# 任务执行结果
+bool success
+string message
+---
+# 任务执行反馈
+string status # e.g., "NAVIGATING", "PICKING", "PLACING"
