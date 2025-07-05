@@ -1,0 +1,31 @@
+# ROS
+build/
+install/
+log/
+devel/
+
+# Python
+*.pyc
+__pycache__/
+*.egg-info/
+dist/
+
+# C++ / IDE
+*.o
+*.so
+*.a
+*.swp
+*.swo
+*~
+*.orig
+.ccls-cache/
+
+# VSCode
+.vscode/
+
+# Gazebo
+.gazebo/
+
+# Misc
+Thumbs.db
+.DS_Store
