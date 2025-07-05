@@ -12,9 +12,9 @@
 
 ## 项目文档与日志
 
-* [系统架构](doc/architecture.md)
-* [开发日志](doc/DevelopLog.md)
-* [调试日志](doc/DebugLog.md)
+* [系统架构](docs/architecture.md)
+* [开发日志](docs/DevelopLog.md)
+* [调试日志](docs/DebugLog.md)
 
 ## 技术栈
 
