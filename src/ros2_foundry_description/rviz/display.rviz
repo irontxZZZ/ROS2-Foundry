@@ -1,0 +1,116 @@
+# 内容较长，请直接从VSCode中创建新文件并保存一个空的RViz2配置。
+# 或者，您可以先启动RViz2，手动添加RobotModel和TF，设置好视角，然后从RViz2中 "File" -> "Save Config As..." 保存到此路径。
+# 这里提供一个最简配置，您之后可以自行美化：
+Panels:
+  - Class: rviz_common/Displays
+    Help Height: 78
+    Name: Displays
+    Property Tree Widget:
+      Expanded:
+        - /Global Options1
+        - /TF1
+        - /RobotModel1
+      Splitter Ratio: 0.5
+    Tree Height: 639
+  - Class: rviz_common/Views
+    Expanded:
+      - /Current View1
+    Name: Views
+    Splitter Ratio: 0.5
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Alpha: 0.5
+      Class: rviz_default_plugins/Grid
+      Color: 160; 160; 164
+      Enabled: true
+      Line Style:
+        Line Width: 0.03
+        Value: Lines
+      Name: Grid
+      Normal Cell Count: 0
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Plane: XY
+      Plane Cell Count: 10
+      Reference Frame: <Fixed Frame>
+      Value: true
+    - Class: rviz_default_plugins/TF
+      Enabled: true
+      Name: TF
+      Marker Scale: 1
+      Show Arrows: true
+      Show Axes: true
+      Show Names: true
+      Tree:
+        base_footprint:
+          base_joint:
+            base_link:
+              arm_base_joint:
+                arm_base_link:
+                  joint1:
+                    link1:
+                      joint2:
+                        link2:
+                          joint3:
+                            link3:
+                              joint4:
+                                link4:
+                                  joint5:
+                                    link5:
+                                      camera_joint:
+                                        camera_link: {}
+                                      joint6:
+                                        tool0:
+                                          gripper_base_joint:
+                                            gripper_base:
+                                              finger_left_joint:
+                                                finger_left_link: {}
+                                              finger_right_joint:
+                                                finger_right_link: {}
+              caster_0.15_joint:
+                caster_0.15_link: {}
+              caster_-0.15_joint:
+                caster_-0.15_link: {}
+              left_wheel_joint:
+                left_wheel_link: {}
+              lidar_joint:
+                lidar_link: {}
+              right_wheel_joint:
+                right_wheel_link: {}
+      Update Interval: 0
+      Value: true
+    - Class: rviz_default_plugins/RobotModel
+      Enabled: true
+      Name: RobotModel
+      Robot Description: robot_description
+      Update Interval: 0
+      Value: true
+  Enabled: true
+  Global Options:
+    Background Color: 48; 48; 48
+    Fixed Frame: base_footprint
+    Frame Rate: 30
+  Name: root
+  Tools:
+    - Class: rviz_default_plugins/Interact
+      Hide Inactive Objects: true
+    - Class: rviz_default_plugins/MoveCamera
+    - Class: rviz_default_plugins/Select
+  Value: true
+  Views:
+    Current:
+      Class: rviz_default_plugins/Orbit
+      Distance: 6.0
+      Focal Point:
+        X: 0
+        Y: 0
+        Z: 0
+      Name: Current View
+      Near Clip Distance: 0.01
+      Pitch: 0.5
+      Target Frame: <Fixed Frame>
+      Value: Orbit (rviz)
+      Yaw: 0.78

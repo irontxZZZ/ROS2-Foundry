@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="robot_arm" params="prefix parent *origin">
+    
+    <joint name="${prefix}arm_base_joint" type="fixed">
+      <parent link="${parent}"/>
+      <child link="${prefix}arm_base_link"/>
+      <xacro:insert_block name="origin"/>
+    </joint>
+
+    <link name="${prefix}arm_base_link">
+      <visual>
+        <geometry>
+          <cylinder radius="0.07" length="0.05"/>
+        </geometry>
+        <material name="grey"/>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.07" length="0.05"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <!-- Arm Joints and Links -->
+    <xacro:macro name="arm_joint" params="name parent child joint_type axis_xyz origin_xyz limit_lower limit_upper">
+      <joint name="${name}" type="${joint_type}">
+        <parent link="${parent}"/>
+        <child link="${child}"/>
+        <origin xyz="${origin_xyz}" rpy="0 0 0"/>
+        <axis xyz="${axis_xyz}"/>
+        <limit lower="${limit_lower}" upper="${limit_upper}" effort="100" velocity="1.0"/>
+      </joint>
+    </xacro:macro>
+
+    <xacro:macro name="arm_link" params="name length radius">
+       <link name="${name}">
+        <visual>
+          <geometry>
+            <cylinder radius="${radius}" length="${length}"/>
+          </geometry>
+          <origin xyz="0 0 ${length/2}" rpy="0 0 0"/>
+          <material name="blue"/>
+        </visual>
+        <collision>
+          <geometry>
+            <cylinder radius="${radius}" length="${length}"/>
+          </geometry>
+           <origin xyz="0 0 ${length/2}" rpy="0 0 0"/>
+        </collision>
+      </link>
+    </xacro:macro>
+
+    <!-- Joint 1 -->
+    <xacro:arm_joint name="${prefix}joint1" parent="${prefix}arm_base_link" child="${prefix}link1" joint_type="revolute" axis_xyz="0 0 1" origin_xyz="0 0 0.025" limit_lower="-${PI}" limit_upper="${PI}"/>
+    <xacro:arm_link name="${prefix}link1" length="0.2" radius="0.05"/>
+
+    <!-- Joint 2 -->
+    <xacro:arm_joint name="${prefix}joint2" parent="${prefix}link1" child="${prefix}link2" joint_type="revolute" axis_xyz="0 1 0" origin_xyz="0 0 0.2" limit_lower="-${PI/2}" limit_upper="${PI/2}"/>
+    <xacro:arm_link name="${prefix}link2" length="0.3" radius="0.05"/>
+
+    <!-- Joint 3 -->
+    <xacro:arm_joint name="${prefix}joint3" parent="${prefix}link2" child="${prefix}link3" joint_type="revolute" axis_xyz="0 1 0" origin_xyz="0 0 0.3" limit_lower="-${PI/2}" limit_upper="${PI/2}"/>
+    <xacro:arm_link name="${prefix}link3" length="0.25" radius="0.05"/>
+
+    <!-- Joint 4 -->
+    <xacro:arm_joint name="${prefix}joint4" parent="${prefix}link3" child="${prefix}link4" joint_type="revolute" axis_xyz="1 0 0" origin_xyz="0 0 0.25" limit_lower="-${PI}" limit_upper="${PI}"/>
+    <xacro:arm_link name="${prefix}link4" length="0.1" radius="0.05"/>
+    
+    <!-- Joint 5 -->
+    <xacro:arm_joint name="${prefix}joint5" parent="${prefix}link4" child="${prefix}link5" joint_type="revolute" axis_xyz="0 1 0" origin_xyz="0 0 0.1" limit_lower="-${PI/2}" limit_upper="${PI/2}"/>
+    <xacro:arm_link name="${prefix}link5" length="0.1" radius="0.05"/>
+
+    <!-- Joint 6 -->
+    <xacro:arm_joint name="${prefix}joint6" parent="${prefix}link5" child="${prefix}tool0" joint_type="revolute" axis_xyz="1 0 0" origin_xyz="0 0 0.1" limit_lower="-${PI}" limit_upper="${PI}"/>
+    
+    <!-- Tool frame -->
+    <link name="${prefix}tool0"/>
+
+  </xacro:macro>
+</robot>

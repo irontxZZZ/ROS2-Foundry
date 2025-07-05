@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<robot name="foundry_bot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Include all parts -->
+  <xacro:include filename="$(find ros2_foundry_description)/urdf/common.xacro"/>
+  <xacro:include filename="$(find ros2_foundry_description)/urdf/base.urdf.xacro"/>
+  <xacro:include filename="$(find ros2_foundry_description)/urdf/arm.urdf.xacro"/>
+  <xacro:include filename="$(find ros2_foundry_description)/urdf/gripper.urdf.xacro"/>
+  <xacro:include filename="$(find ros2_foundry_description)/urdf/sensors.urdf.xacro"/>
+
+  <!-- Instantiate all parts -->
+
+  <!-- Mobile Base -->
+  <xacro:mobile_base prefix=""/>
+
+  <!-- Arm -->
+  <xacro:robot_arm prefix="" parent="base_link">
+    <origin xyz="0 0 0.05" rpy="0 0 0"/>
+  </xacro:robot_arm>
+
+  <!-- Gripper -->
+  <xacro:gripper prefix="" parent="tool0">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </xacro:gripper>
+
+  <!-- Sensors -->
+  <xacro:lidar prefix="" parent="base_link">
+    <origin xyz="0.2 0 0.05" rpy="0 0 0"/>
+  </xacro:lidar>
+  
+  <xacro:depth_camera prefix="" parent="link5">
+    <origin xyz="0 0 0.05" rpy="0 ${PI/2} 0"/>
+  </xacro:depth_camera>
+
+</robot>

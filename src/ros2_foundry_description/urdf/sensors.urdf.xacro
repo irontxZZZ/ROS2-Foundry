@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- 2D Lidar -->
+  <xacro:macro name="lidar" params="prefix parent *origin">
+    <joint name="${prefix}lidar_joint" type="fixed">
+      <parent link="${parent}"/>
+      <child link="${prefix}lidar_link"/>
+      <xacro:insert_block name="origin"/>
+    </joint>
+
+    <link name="${prefix}lidar_link">
+      <visual>
+        <geometry>
+          <cylinder radius="0.05" length="0.04"/>
+        </geometry>
+        <material name="black"/>
+      </visual>
+    </link>
+  </xacro:macro>
+
+  <!-- 3D Depth Camera -->
+  <xacro:macro name="depth_camera" params="prefix parent *origin">
+    <joint name="${prefix}camera_joint" type="fixed">
+      <parent link="${parent}"/>
+      <child link="${prefix}camera_link"/>
+      <xacro:insert_block name="origin"/>
+    </joint>
+
+    <link name="${prefix}camera_link">
+      <visual>
+        <geometry>
+          <box size="0.02 0.08 0.03"/>
+        </geometry>
+        <material name="black"/>
+      </visual>
+    </link>
+  </xacro:macro>
+
+</robot>
