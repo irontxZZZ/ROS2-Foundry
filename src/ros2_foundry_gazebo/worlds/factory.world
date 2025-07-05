@@ -1,0 +1,63 @@
+<?xml version="1.0" ?>
+<sdf version="1.7">
+  <world name="factory_world">
+    
+    <physics name="dart" type="dart">
+      <dart>
+        <collision_detector>fcl</collision_detector>
+        <solver>
+          <type>dantzig</type>
+        </solver>
+      </dart>
+    </physics>
+
+    <plugin
+      filename="libgazebo_ros_init.so"
+      name="gazebo_ros_init">
+    </plugin>
+    <plugin
+      filename="libgazebo_ros_factory.so"
+      name="gazebo_ros_factory">
+    </plugin>
+
+    <light type="directional" name="sun">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry><plane><normal>0 0 1</normal><size>20 20</size></plane></geometry>
+        </collision>
+        <visual name="visual">
+          <geometry><plane><normal>0 0 1</normal><size>20 20</size></plane></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri><name>Gazebo/Grey</name></script></material>
+        </visual>
+      </link>
+    </model>
+
+    <model name='workstation'>
+      <static>true</static>
+      <pose>2.5 0 0 0 0 1.57</pose>
+      <link name='link'>
+        <collision name='surface'><pose>0 0 0.7 0 0 0</pose><geometry><box><size>1.5 0.8 0.05</size></box></geometry></collision>
+        <visual name='visual_surface'><pose>0 0 0.7 0 0 0</pose><geometry><box><size>1.5 0.8 0.05</size></box></geometry>
+           <material><script><uri>file://media/materials/scripts/gazebo.material</uri><name>Gazebo/Wood</name></script></material>
+        </visual>
+         <collision name='leg1'><pose>-0.7 -0.35 0.35 0 0 0</pose><geometry><box><size>0.05 0.05 0.7</size></box></geometry></collision>
+         <visual name='visual_leg1'><pose>-0.7 -0.35 0.35 0 0 0</pose><geometry><box><size>0.05 0.05 0.7</size></box></geometry></visual>
+         <collision name='leg2'><pose>0.7 -0.35 0.35 0 0 0</pose><geometry><box><size>0.05 0.05 0.7</size></box></geometry></collision>
+         <visual name='visual_leg2'><pose>0.7 -0.35 0.35 0 0 0</pose><geometry><box><size>0.05 0.05 0.7</size></box></geometry></visual>
+         <collision name='leg3'><pose>-0.7 0.35 0.35 0 0 0</pose><geometry><box><size>0.05 0.05 0.7</size></box></geometry></collision>
+         <visual name='visual_leg3'><pose>-0.7 0.35 0.35 0 0 0</pose><geometry><box><size>0.05 0.05 0.7</size></box></geometry></visual>
+         <collision name='leg4'><pose>0.7 0.35 0.35 0 0 0</pose><geometry><box><size>0.05 0.05 0.7</size></box></geometry></collision>
+         <visual name='visual_leg4'><pose>0.7 0.35 0.35 0 0 0</pose><geometry><box><size>0.05 0.05 0.7</size></box></geometry></visual>
+      </link>
+    </model>
+  </world>
+</sdf>
