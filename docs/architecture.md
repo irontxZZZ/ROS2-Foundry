@@ -4,50 +4,46 @@
 
 ## 架构图 (Mermaid.js)
 
-(```)mermaid
+```mermaid
 graph TD
-    subgraph "外部系统"
-        FMS[工厂管理系统 (模拟)]
+    subgraph "任务层 (Task Layer)"
+        FMS_Interface["外部任务接口<br/>(fms_interface)"]
+        Task_Coordinator["任务协调器<br/>(task_coordinator/BehaviorTree)"]
     end
 
-    subgraph "任务层"
-        BT[BehaviorTree Executor\n(ros2_foundry_bringup)]
+    subgraph "功能层 (Functional Layer)"
+        Navigation["导航系统<br/>(Nav2)"]
+        Manipulation["操作规划系统<br/>(MoveIt2)"]
+        Perception["视觉感知系统<br/>(perception_sim)"]
     end
 
-    subgraph "能力层"
-        CustomBTs[自定义BT节点\n(ros2_foundry_bt_nodes)]
-        Nav2[自主导航\n(ros2_foundry_navigation)]
-        MoveIt2[运动规划与操作\n(ros2_foundry_moveit_config)]
-        Perception[视觉感知\n(ros2_foundry_perception)]
+    subgraph "执行层 (Execution Layer)"
+        ROS2_Control["硬件抽象层<br/>(ros2_control)"]
+        Robot_Description["机器人模型<br/>(mobile_manipulator_description)"]
     end
 
-    subgraph "硬件抽象与仿真层"
-        ros2_control[ros2_control]
-        RobotModel[机器人模型\n(ros2_foundry_description)]
-        Gazebo[Gazebo仿真环境\n(ros2_foundry_gazebo)]
-    end
-    
-    subgraph "接口定义"
-        Interfaces[自定义接口\n(ros2_foundry_interfaces)]
+    subgraph "仿真/物理世界"
+        Gazebo["Gazebo仿真环境"]
+        RealRobot["真实机器人硬件"]
     end
 
-    %% 连接关系
-    FMS -- Mission Goal/Result --> BT
-    BT -- Executes --> CustomBTs
-    CustomBTs -- Nav Action --> Nav2
-    CustomBTs -- Pick/Place Action --> MoveIt2
-    CustomBTs -- Get Pose Service --> Perception
-    MoveIt2 -- Trajectory --> ros2_control
-    Nav2 -- cmd_vel --> ros2_control
-    Gazebo -- Sensor Data --> Perception
-    Gazebo -- Sensor Data --> Nav2
-    Gazebo -- Joint States --> ros2_control
-    ros2_control -- Joint States --> RobotModel
-    RobotModel -- URDF --> Gazebo
-    RobotModel -- URDF --> MoveIt2
-    RobotModel -- URDF --> Nav2
-    Interfaces -- Used By --> CustomBTs & Perception & MoveIt2
-(```)
+    FMS_Interface -->|"RequestTask.action"| Task_Coordinator
+    Task_Coordinator -->|"调用BT节点"| Navigation
+    Task_Coordinator -->|"调用BT节点"| Manipulation
+    Task_Coordinator -->|"调用BT节点"| Perception
+
+    Perception -->|"GetObjectPose.srv"| Task_Coordinator
+    Navigation -->|"cmd_vel"| ROS2_Control
+    Manipulation -->|"joint_trajectory"| ROS2_Control
+
+    ROS2_Control -->|"驱动指令"| Gazebo
+    ROS2_Control -->|"驱动指令"| RealRobot
+    Gazebo -->|"传感器数据"| Perception
+    Gazebo -->|"传感器数据"| Navigation
+    Robot_Description -->|"URDF"| Gazebo
+    Robot_Description -->|"URDF"| Navigation
+    Robot_Description -->|"URDF"| Manipulation
+```
 
 ## 模块说明
 
