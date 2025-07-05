@@ -24,7 +24,7 @@
 
 ## 项目结构
 
-(```)
+```
 ros2_foundry/
 ├── .gitignore               # Git忽略配置
 ├── docs/                    # 项目文档
@@ -40,7 +40,7 @@ ros2_foundry/
     ├── ros2_foundry_navigation    # Nav2导航配置
     ├── ros2_foundry_perception    # 视觉感知
     └── ros2_foundry_bt_nodes      # 自定义行为树节点
-(```)
+```
 
 ## 安装与构建
 (稍后补充)
